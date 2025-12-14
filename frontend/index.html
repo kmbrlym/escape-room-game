@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The UTM Code Assembly - Escape Room Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">🚀 The UTM Code Assembly</h1>
+        </header>
+
+
+        <section class="progress-section" aria-label="Game progress">
+            <h2 class="progress-title">Code Progress</h2>
+            <div class="progress-indicator">
+                <div class="code-letter" id="letter-u" data-letter="U">
+                    <span class="letter-placeholder">U</span>
+                    <span class="letter-status" aria-label="Letter U status">?</span>
+                </div>
+                <div class="code-letter" id="letter-t" data-letter="T">
+                    <span class="letter-placeholder">T</span>
+                    <span class="letter-status" aria-label="Letter T status">?</span>
+                </div>
+                <div class="code-letter" id="letter-m" data-letter="M">
+                    <span class="letter-placeholder">M</span>
+                    <span class="letter-status" aria-label="Letter M status">?</span>
+                </div>
+            </div>
+            <p class="progress-hint">Complete challenges to unlock the code!</p>
+        </section>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Home Page / Game Instructions -->
+            <section id="home-page" class="page-section active">
+                <div class="instructions-container">
+                    <h2 class="section-title">Welcome to The UTM Code Assembly!</h2>
+                    
+                    <div class="game-rules">
+                        <h3>📋 How to Play</h3>
+                        <ol class="rules-list">
+                            <li>Complete challenges in order to collect code letters</li>
+                            <li>Each challenge unlocks the next one</li>
+                            <li>Collect all three letters: <strong>U</strong>, <strong>T</strong>, <strong>M</strong></li>
+                            <li>Use the complete code to unlock the Final Escape</li>
+                            <li>Good luck and have fun!</li>
+                        </ol>
+                    </div>
+
+                    <div class="challenges-overview">
+                        <h3>🔑 The Challenges</h3>
+                        
+                        <div class="challenge-card">
+                            <div class="challenge-header">
+                                <span class="challenge-number">1</span>
+                                <h4>Challenge 1: The Centre Location</h4>
+                            </div>
+                            <p class="challenge-description">
+                                Do you know where the Career Centre is located? Rearrange the letters to spell the location.<strong>U</strong>.
+                            </p>
+                            <p class="challenge-mechanic">Puzzle Type: Word Assembly</p>
+                            <button class="challenge-btn" data-challenge="1" aria-label="Start Challenge 1">
+                                Start Challenge 1
+                            </button>
+                        </div>
+
+                        <div class="challenge-card">
+                            <div class="challenge-header">
+                                <span class="challenge-number">2</span>
+                                <h4>Challenge 2: Careers by Major Match</h4>
+                            </div>
+                            <p class="challenge-description">
+                                Correctly match UTM Major Groups to related Career Fields to earn the letter <strong>T</strong>.
+                            </p>
+                            <p class="challenge-mechanic">Puzzle Type: Card Matching</p>
+                            <button class="challenge-btn" data-challenge="2" aria-label="Start Challenge 2" disabled>
+                                Start Challenge 2
+                            </button>
+                        </div>
+
+                        <div class="challenge-card">
+                            <div class="challenge-header">
+                                <span class="challenge-number">3</span>
+                                <h4>Challenge 3: Program Function Match</h4>
+                            </div>
+                            <p class="challenge-description">
+                                Match the program name to its core function to find the final letter <strong>M</strong>.
+                            </p>
+                            <p class="challenge-mechanic">Puzzle Type: Three-Way Matching</p>
+                            <button class="challenge-btn" data-challenge="3" aria-label="Start Challenge 3" disabled>
+                                Start Challenge 3
+                            </button>
+                        </div>
+
+                        <div class="challenge-card final-card">
+                            <div class="challenge-header">
+                                <span class="challenge-number">🔓</span>
+                                <h4>Final Escape: Unlock the Career Centre</h4>
+                            </div>
+                            <p class="challenge-description">
+                                Enter the complete code to unlock the Career Centre and claim your reward!
+                            </p>
+                            <button class="challenge-btn final-btn" data-challenge="final" aria-label="Final Escape" disabled>
+                                Unlock Career Centre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Challenge 1: Word Assembly -->
+            <section id="challenge1-page" class="page-section">
+                <div class="challenge-container">
+                    <h2>Challenge 1: The Centre Location</h2>
+                    <p class="challenge-instruction">
+                        Do you know where the Career Centre is located? Rearrange the letters below to spell the location.
+                    </p>
+
+                    <!-- Letter Bin -->
+                    <div class="letter-bin-section">
+                        <h3>Available Letters</h3>
+                        <div class="letter-bin" id="letter-bin">
+                            <!-- Letters will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <!-- Assembly Area -->
+                    <div class="assembly-section">
+                        <h3>Assembly Area</h3>
+                        <div class="assembly-area" id="assembly-area">
+                            <!-- DAVIS (5 letters) -->
+                            <div class="assembly-slot" data-index="0"></div>
+                            <div class="assembly-slot" data-index="1"></div>
+                            <div class="assembly-slot" data-index="2"></div>
+                            <div class="assembly-slot" data-index="3"></div>
+                            <div class="assembly-slot" data-index="4"></div>
+                            <!-- Space -->
+                            <div class="assembly-slot space-slot" data-index="5" data-space="true">
+                                <span class="space-indicator">_</span>
+                            </div>
+                            <!-- MAIN (4 letters) -->
+                            <div class="assembly-slot" data-index="6"></div>
+                            <div class="assembly-slot" data-index="7"></div>
+                            <div class="assembly-slot" data-index="8"></div>
+                            <div class="assembly-slot" data-index="9"></div>
+                            <!-- Space -->
+                            <div class="assembly-slot space-slot" data-index="10" data-space="true">
+                                <span class="space-indicator">_</span>
+                            </div>
+                            <!-- FLOOR (5 letters) -->
+                            <div class="assembly-slot" data-index="11"></div>
+                            <div class="assembly-slot" data-index="12"></div>
+                            <div class="assembly-slot" data-index="13"></div>
+                            <div class="assembly-slot" data-index="14"></div>
+                            <div class="assembly-slot" data-index="15"></div>
+                        </div>
+                        <button class="clear-btn" id="clear-assembly-btn">Clear All</button>
+                    </div>
+
+                    <!-- Check Answer Button -->
+                    <div class="check-section">
+                        <button class="check-btn" id="check-answer-btn" onclick="if(typeof checkAnswer === 'function') { checkAnswer(); } else { console.error('checkAnswer function not found'); }">Check Answer</button>
+                    </div>
+
+                    <!-- Clue Card (hidden initially) -->
+                    <div class="clue-card hidden" id="clue-card">
+                        <div class="clue-content">
+                            <h3>🎉 Congratulations!</h3>
+                            <p>You correctly assembled the location!</p>
+                            <p class="clue-instruction">
+                                <strong>Take the very first letter of the assembled word for the first code component.</strong>
+                            </p>
+                            <div class="code-component-reveal">
+                                <span class="code-letter-large">U</span>
+                                <p>Code Component: <strong>U</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div class="error-message hidden" id="error-message">
+                        <p>That's not quite right. Try rearranging the letters again!</p>
+                    </div>
+
+                    <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+                </div>
+            </section>
+
+            <section id="challenge2-page" class="page-section">
+                <div class="challenge-container">
+                    <h2>Challenge 2: Careers by Major Match</h2>
+                    <p class="challenge-instruction">
+                        Match each UTM Major Group with its related Career Field. Click on a major card, then click on the matching career card.
+                    </p>
+
+                    <!-- All cards mixed together -->
+                    <div class="cards-container">
+                        <!-- Scattered cards - majors and careers mixed -->
+                        <div class="example-card major-card">
+                            <div class="card-body" id="CSmajor">
+                                <span class="card-badge">Major</span>
+                                <h3 class="card-title">Computer Science</h3>
+                                <p class="card-description">Study algorithms, data structures, and software development principles.</p>
+                                <div class="card-footer">
+                                    <span class="card-tag">Technology</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="example-card career-card">
+                            <div class="card-body" id="CScareer">
+                                <span class="card-badge">Career</span>
+                                <h3 class="card-title">Cloud Engineer</h3>
+                                <p class="card-description">Design and manage cloud infrastructure and services.</p>
+                            </div>
+                        </div>
+                        <div class="example-card major-card">
+                            <div class="card-body" id="FSmajor">
+                                <span class="card-badge">Major</span>
+                                <h3 class="card-title">Forensic Science</h3>
+                                <p class="card-description">Apply scientific methods to investigate crimes and analyze evidence.</p>
+                                <div class="card-footer">
+                                    <span class="card-tag">Criminal Justice</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="example-card major-card">
+                            <div class="card-body" id="BioMajor">
+                                <span class="card-badge">Major</span>
+                                <h3 class="card-title">Biology</h3>
+                                <p class="card-description">Explore living organisms, their processes, and interactions with the environment.</p>
+                                <div class="card-footer">
+                                    <span class="card-tag">Science</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="example-card career-card">
+                            <div class="card-body" id="FScareer">
+                                <span class="card-badge">Career</span>
+                                <h3 class="card-title">Crime Scene Investigator</h3>
+                                <p class="card-description">Collect and analyze physical evidence from crime scenes.</p>
+                            </div>
+                        </div>
+                        <div class="example-card career-card">
+                            <div class="card-body" id="Biocareer">
+                                <span class="card-badge">Career</span>
+                                <h3 class="card-title">Food Safety Inspector</h3>
+                                <p class="card-description">Ensure food products meet safety and quality standards.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="clear-btn" id="clear-assembly-btn" onclick="clearChallenge2()">Clear All</button>
+                    <div class="check-section">
+                        <button class="check-btn" id="check-answer-btn" onclick="checkAnswerChallenge2()">Check Answer</button>
+                    </div>
+                    <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+                </div>
+            </section>
+
+            <section id="challenge3-page" class="page-section">
+                <div class="challenge-container">
+                    <h2>Challenge 3: Program Function Match</h2>
+                    <p>Challenge 3 content will be implemented here.</p>
+                    <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+                </div>
+            </section>
+
+            <section id="final-escape-page" class="page-section">
+                <div class="challenge-container">
+                    <h2>Final Escape: Unlock the Career Centre</h2>
+                    <p>Final escape content will be implemented here.</p>
+                    <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="game-footer">
+            <p>&copy; 2024 UTM Career Centre - Escape Room Game</p>
+        </footer>
+    </div>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/challenge1.js"></script>
+    <script src="js/challenge2.js"></script>
+    <!-- <script src="js/challenge3.js"></script>
+    <script src="js/final-escape.js"></script> -->
+</body>
+</html>
+

@@ -1,0 +1,7 @@
+gamer/services/ValidationService.class
+gamer/models/Challenge1Request.class
+gamer/GameServer.class
+gamer/models/GameState.class
+gamer/GameServer$1.class
+gamer/models/ChallengeResponse.class
+gamer/controllers/Challenge1Controller.class
