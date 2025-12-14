@@ -2,26 +2,19 @@ const CHALLENGE1_LETTERS = ['D', 'A', 'V', 'I', 'S', 'M', 'A', 'I', 'N', 'F', 'L
 
 let selectedLetters = [];
 let availableLetters = [...CHALLENGE1_LETTERS];
+let listenersSetup = false;
 
 function initChallenge1() {
     selectedLetters = new Array(16).fill(null);
     selectedLetters[5] = ' ';
     selectedLetters[10] = ' ';
     availableLetters = [...CHALLENGE1_LETTERS];
+    listenersSetup = false;
     
-    // Clear previous state
     const letterBin = document.getElementById('letter-bin');
     const assemblyArea = document.getElementById('assembly-area');
     
-    if (!letterBin) {
-        console.error('letter-bin not found');
-        return;
-    }
-    
-    if (!assemblyArea) {
-        console.error('assembly-area not found');
-        return;
-    }
+    if (!letterBin || !assemblyArea) return;
     
     letterBin.innerHTML = '';
     assemblyArea.querySelectorAll('.assembly-slot').forEach(slot => {
@@ -40,7 +33,6 @@ function initChallenge1() {
         letterBin.appendChild(letterElement);
     });
     
-    // Setup event listeners
     setupEventListeners();
 }
 
@@ -95,25 +87,14 @@ function handleLetterClick(e) {
 }
 
 function setupEventListeners() {
+    if (listenersSetup) return;
+    
     const assemblyArea = document.getElementById('assembly-area');
     const slots = assemblyArea ? assemblyArea.querySelectorAll('.assembly-slot') : [];
     const checkBtn = document.getElementById('check-answer-btn');
     const clearBtn = document.getElementById('clear-assembly-btn');
     
-    if (!assemblyArea) {
-        console.error('assembly-area not found');
-        return;
-    }
-    
-    if (!checkBtn) {
-        console.error('check-answer-btn not found');
-        return;
-    }
-    
-    if (!clearBtn) {
-        console.error('clear-assembly-btn not found');
-        return;
-    }
+    if (!assemblyArea || !checkBtn || !clearBtn) return;
     
     slots.forEach(slot => {
         slot.addEventListener('dragover', handleDragOver);
@@ -121,9 +102,7 @@ function setupEventListeners() {
         slot.addEventListener('dragleave', handleDragLeave);
     });
     
-    // Add event listeners
     checkBtn.addEventListener('click', function(e) {
-        console.log('Check Answer button clicked');
         e.preventDefault();
         e.stopPropagation();
         checkAnswer();
@@ -135,7 +114,7 @@ function setupEventListeners() {
         clearAssembly();
     });
     
-    console.log('Challenge 1 event listeners set up successfully');
+    listenersSetup = true;
 }
 
 function handleDragOver(e) {
@@ -151,9 +130,7 @@ function handleDrop(e) {
     e.preventDefault();
     e.currentTarget.classList.remove('drag-over');
     
-    if (e.currentTarget.dataset.space === 'true') {
-        return;
-    }
+    if (e.currentTarget.dataset.space === 'true') return;
     
     const data = JSON.parse(e.dataTransfer.getData('text/plain'));
     const letter = data.letter;
@@ -182,9 +159,7 @@ function handleDrop(e) {
 }
 
 function placeLetterInSlot(letter, slot) {
-    if (slot.dataset.space === 'true') {
-        return;
-    }
+    if (slot.dataset.space === 'true') return;
     
     const slotIndex = parseInt(slot.dataset.index);
     
@@ -226,16 +201,11 @@ function clearAssembly() {
     });
 }
 
-// Make checkAnswer globally accessible
 window.checkAnswer = async function checkAnswer() {
-    console.log('checkAnswer function called');
     const word = selectedLetters
         .filter(letter => letter !== null)
         .join('')
         .trim();
-    
-    console.log('Assembled word:', word);
-    console.log('Selected letters:', selectedLetters);
     
     if (word.length === 0) {
         showError('Please arrange some letters first!');
@@ -243,10 +213,7 @@ window.checkAnswer = async function checkAnswer() {
     }
     
     const checkBtn = document.getElementById('check-answer-btn');
-    if (!checkBtn) {
-        console.error('Check button not found in checkAnswer');
-        return;
-    }
+    if (!checkBtn) return;
     
     checkBtn.disabled = true;
     checkBtn.textContent = 'Checking...';
@@ -264,15 +231,12 @@ window.checkAnswer = async function checkAnswer() {
         if (response.success) {
             showSuccess(response);
             
-            // Update game state - merge with existing to preserve all collected letters
             if (response.gameState && window.gameState) {
-                // Only set letters to true if they're true in response (don't overwrite with false)
                 if (response.gameState.collectedLetters) {
                     Object.keys(response.gameState.collectedLetters).forEach(letter => {
                         if (response.gameState.collectedLetters[letter] === true) {
                             window.gameState.collectedLetters[letter] = true;
                         }
-                        // Don't set to false - preserve existing true values
                     });
                 }
                 if (response.gameState.challengesCompleted) {
@@ -284,7 +248,6 @@ window.checkAnswer = async function checkAnswer() {
                 }
             }
             
-            // Always call collectLetter and completeChallenge to ensure UI updates
             if (typeof collectLetter === 'function') {
                 collectLetter('U');
             }
@@ -293,7 +256,16 @@ window.checkAnswer = async function checkAnswer() {
                 completeChallenge(1);
             }
             
-            // Force UI update after all state changes
+            if (window.saveGameState && typeof window.saveGameState === 'function') {
+                window.saveGameState();
+            } else {
+                try {
+                    localStorage.setItem('gameState', JSON.stringify(window.gameState));
+                } catch (e) {
+                    console.error('Error saving game state:', e);
+                }
+            }
+            
             if (typeof updateUI === 'function') {
                 updateUI();
             }
@@ -301,7 +273,6 @@ window.checkAnswer = async function checkAnswer() {
             showError(response.message || 'That\'s not quite right. Try again!');
         }
     } catch (error) {
-        console.error('Error details:', error);
         const errorMessage = error.message || 'Unknown error';
         if (errorMessage.includes('Failed to fetch') || errorMessage.includes('NetworkError') || errorMessage.includes('CORS')) {
             showError('Error connecting to server. Make sure: 1) Backend is running on http://localhost:8080, 2) Frontend is served on http://localhost:8000 (not file://). Run: cd frontend && python3 -m http.server 8000');
@@ -331,55 +302,6 @@ function shuffleArray(array) {
     }
 }
 
-// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, setting up Challenge 1 observer');
-    
-    const targetNode = document.getElementById('challenge1-page');
-    if (!targetNode) {
-        console.error('challenge1-page element not found');
-        return;
-    }
-    
-    // Function to initialize if page is active
-    function tryInit() {
-        const challenge1Page = document.getElementById('challenge1-page');
-        if (challenge1Page && challenge1Page.classList.contains('active')) {
-            console.log('Challenge 1 page is active, initializing...');
-            initChallenge1();
-        }
-    }
-    
-    // Set up MutationObserver
-    const observer = new MutationObserver(function(mutations) {
-        console.log('Mutation detected on challenge1-page');
-        tryInit();
-    });
-
-    observer.observe(targetNode, {
-        attributes: true,
-        attributeFilter: ['class']
-    });
-    
-    // Try to initialize immediately if already active
-    tryInit();
-    
-    // Also try after a short delay (in case navigation happens before DOM ready)
-    setTimeout(tryInit, 100);
-    setTimeout(tryInit, 500);
-    
-    // Fallback: try to set up button listener directly
-    setTimeout(function() {
-        const checkBtn = document.getElementById('check-answer-btn');
-        if (checkBtn) {
-            console.log('Setting up direct fallback listener for check button');
-            checkBtn.addEventListener('click', function(e) {
-                console.log('Fallback: Check Answer button clicked');
-                e.preventDefault();
-                e.stopPropagation();
-                checkAnswer();
-            });
-        }
-    }, 1000);
+    initChallenge1();
 });
-

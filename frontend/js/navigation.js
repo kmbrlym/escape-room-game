@@ -1,77 +1,83 @@
-// Navigation and Page Management
-let gameState = {
-    collectedLetters: {
-        U: false,
-        T: false,
-        M: false
-    },
-    challengesCompleted: {
-        challenge1: false,
-        challenge2: false,
-        challenge3: false
+function loadGameState() {
+    const savedState = localStorage.getItem('gameState');
+    if (savedState) {
+        try {
+            return JSON.parse(savedState);
+        } catch (e) {
+            console.error('Error parsing saved game state:', e);
+        }
     }
-};
+    return {
+        collectedLetters: {
+            U: false,
+            T: false,
+            M: false
+        },
+        challengesCompleted: {
+            challenge1: false,
+            challenge2: false,
+            challenge3: false
+        }
+    };
+}
 
-// Make gameState globally accessible so other scripts can update it
+function saveGameState() {
+    try {
+        localStorage.setItem('gameState', JSON.stringify(gameState));
+    } catch (e) {
+        console.error('Error saving game state:', e);
+    }
+}
+
+let gameState = loadGameState();
 window.gameState = gameState;
 
-// Initialize navigation on page load
 document.addEventListener('DOMContentLoaded', function() {
-    initializeChallengeButtons();
-    updateUI();
-    // Show page based on URL hash, or default to home
-    if (window.location.hash) {
-        const hash = window.location.hash.substring(1);
-        showPage(hash, false);
+    gameState = loadGameState();
+    window.gameState = gameState;
+    
+    if (document.getElementById('home-page') || !window.location.pathname.includes('challenge')) {
+        initializeChallengeButtons();
+        updateUI();
+    } else {
+        updateUI();
     }
 });
 
-// Initialize challenge buttons
 function initializeChallengeButtons() {
     const challengeButtons = document.querySelectorAll('.challenge-btn');
     challengeButtons.forEach(button => {
         button.addEventListener('click', function() {
             const challenge = this.getAttribute('data-challenge');
             if (challenge === '1') {
-                showPage('challenge1');
+                window.location.href = 'challenge1.html';
             } else if (challenge === '2') {
-                showPage('challenge2');
+                window.location.href = 'challenge2.html';
             } else if (challenge === '3') {
-                showPage('challenge3');
+                window.location.href = 'challenge3.html';
             } else if (challenge === 'final') {
-                showPage('final-escape');
+                window.location.href = 'final-escape.html';
             }
         });
     });
 }
 
-// Show specific page
-// updateHash: if true, updates URL hash (default: true)
-function showPage(pageName, updateHash = true) {
-    // Hide all pages
-    const allPages = document.querySelectorAll('.page-section');
-    allPages.forEach(page => {
-        page.classList.remove('active');
-    });
-
-    // Show selected page
-    const targetPage = document.getElementById(`${pageName}-page`);
-    if (targetPage) {
-        targetPage.classList.add('active');
-    } else {
-        document.getElementById('home-page').classList.add('active');
-        pageName = 'home';
-    }
-
-    // Update URL hash if requested
-    if (updateHash) {
-        window.location.hash = pageName;
+function showPage(pageName) {
+    if (pageName === 'challenge1') {
+        window.location.href = 'challenge1.html';
+    } else if (pageName === 'challenge2') {
+        window.location.href = 'challenge2.html';
+    } else if (pageName === 'challenge3') {
+        window.location.href = 'challenge3.html';
+    } else if (pageName === 'final-escape') {
+        window.location.href = 'final-escape.html';
+    } else if (pageName === 'home') {
+        window.location.href = 'index.html';
     }
 }
 
 function updateUI() {
     updateProgressIndicator();
-
     updateChallengeButtons();
 }
 
@@ -88,7 +94,6 @@ function updateProgressIndicator() {
         }
     });
 }
-
 
 function updateChallengeButtons() {
     const challenge1Btn = document.querySelector('[data-challenge="1"]');
@@ -119,29 +124,29 @@ function updateChallengeButtons() {
 function collectLetter(letter) {
     if (['U', 'T', 'M'].includes(letter)) {
         gameState.collectedLetters[letter] = true;
-        // Also update window.gameState if it exists
         if (window.gameState) {
             window.gameState.collectedLetters[letter] = true;
         }
+        saveGameState();
         updateUI();
     }
 }
 
 function completeChallenge(challengeNumber) {
     gameState.challengesCompleted[`challenge${challengeNumber}`] = true;
-    // Also update window.gameState if it exists
     if (window.gameState) {
         window.gameState.challengesCompleted[`challenge${challengeNumber}`] = true;
     }
+    saveGameState();
     updateUI();
 }
 
-// Make updateUI globally accessible
 window.updateUI = updateUI;
+window.saveGameState = saveGameState;
 
-// Handle hash changes (back/forward browser buttons)
 window.addEventListener('hashchange', function() {
-    const hash = window.location.hash.substring(1) || 'home';
-    showPage(hash);
+    if (document.getElementById('home-page')) {
+        const hash = window.location.hash.substring(1) || 'home';
+        showPage(hash);
+    }
 });
-

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 1 - UTM Career Centre Escape Room</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">UTM Career Centre Escape Room</h1>
+        </header>
+
+        <section class="progress-section" aria-label="Game progress">
+            <h2 class="progress-title">Code Progress</h2>
+            <div class="progress-indicator">
+                <div class="code-letter" id="letter-u" data-letter="U">
+                    <span class="letter-placeholder">U</span>
+                    <span class="letter-status" aria-label="Letter U status">?</span>
+                </div>
+                <div class="code-letter" id="letter-t" data-letter="T">
+                    <span class="letter-placeholder">T</span>
+                    <span class="letter-status" aria-label="Letter T status">?</span>
+                </div>
+                <div class="code-letter" id="letter-m" data-letter="M">
+                    <span class="letter-placeholder">M</span>
+                    <span class="letter-status" aria-label="Letter M status">?</span>
+                </div>
+            </div>
+            <p class="progress-hint">Complete challenges to unlock the code!</p>
+        </section>
+
+        <main class="main-content">
+            <div class="challenge-container">
+                <h2>Challenge 1: The Centre Location</h2>
+                <p class="challenge-instruction">
+                    Do you know where the Career Centre is located? Rearrange the letters below to spell the location.
+                </p>
+
+                <!-- Letter Bin -->
+                <div class="letter-bin-section">
+                    <h3>Available Letters</h3>
+                    <div class="letter-bin" id="letter-bin">
+                        <!-- Letters will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Assembly Area -->
+                <div class="assembly-section">
+                    <h3>Assembly Area</h3>
+                    <div class="assembly-area" id="assembly-area">
+                        <!-- DAVIS (5 letters) -->
+                        <div class="assembly-slot" data-index="0"></div>
+                        <div class="assembly-slot" data-index="1"></div>
+                        <div class="assembly-slot" data-index="2"></div>
+                        <div class="assembly-slot" data-index="3"></div>
+                        <div class="assembly-slot" data-index="4"></div>
+                        <!-- Space -->
+                        <div class="assembly-slot space-slot" data-index="5" data-space="true">
+                            <span class="space-indicator">_</span>
+                        </div>
+                        <!-- MAIN (4 letters) -->
+                        <div class="assembly-slot" data-index="6"></div>
+                        <div class="assembly-slot" data-index="7"></div>
+                        <div class="assembly-slot" data-index="8"></div>
+                        <div class="assembly-slot" data-index="9"></div>
+                        <!-- Space -->
+                        <div class="assembly-slot space-slot" data-index="10" data-space="true">
+                            <span class="space-indicator">_</span>
+                        </div>
+                        <!-- FLOOR (5 letters) -->
+                        <div class="assembly-slot" data-index="11"></div>
+                        <div class="assembly-slot" data-index="12"></div>
+                        <div class="assembly-slot" data-index="13"></div>
+                        <div class="assembly-slot" data-index="14"></div>
+                        <div class="assembly-slot" data-index="15"></div>
+                    </div>
+                    <button class="clear-btn" id="clear-assembly-btn">Clear All</button>
+                </div>
+
+                <!-- Check Answer Button -->
+                <div class="check-section">
+                    <button class="check-btn" id="check-answer-btn">Check Answer</button>
+                </div>
+
+                <button class="back-btn" onclick="window.location.href='index.html'">← Back to Home</button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="game-footer">
+            <p>&copy; 2024 UTM Career Centre - Escape Room Game</p>
+        </footer>
+    </div>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/challenge1.js"></script>
+</body>
+</html>
