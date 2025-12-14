@@ -12,6 +12,9 @@ let gameState = {
     }
 };
 
+// Make gameState globally accessible so other scripts can update it
+window.gameState = gameState;
+
 // Initialize navigation on page load
 document.addEventListener('DOMContentLoaded', function() {
     initializeChallengeButtons();
@@ -116,14 +119,25 @@ function updateChallengeButtons() {
 function collectLetter(letter) {
     if (['U', 'T', 'M'].includes(letter)) {
         gameState.collectedLetters[letter] = true;
+        // Also update window.gameState if it exists
+        if (window.gameState) {
+            window.gameState.collectedLetters[letter] = true;
+        }
         updateUI();
     }
 }
 
 function completeChallenge(challengeNumber) {
     gameState.challengesCompleted[`challenge${challengeNumber}`] = true;
+    // Also update window.gameState if it exists
+    if (window.gameState) {
+        window.gameState.challengesCompleted[`challenge${challengeNumber}`] = true;
+    }
     updateUI();
 }
+
+// Make updateUI globally accessible
+window.updateUI = updateUI;
 
 // Handle hash changes (back/forward browser buttons)
 window.addEventListener('hashchange', function() {

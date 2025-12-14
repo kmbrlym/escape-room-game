@@ -1,7 +1,9 @@
+gamer/controllers/Challenge2Controller.class
 gamer/services/ValidationService.class
 gamer/models/Challenge1Request.class
 gamer/GameServer.class
 gamer/models/GameState.class
+gamer/models/Challenge2Request.class
 gamer/GameServer$1.class
 gamer/models/ChallengeResponse.class
 gamer/controllers/Challenge1Controller.class

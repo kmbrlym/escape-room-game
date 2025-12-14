@@ -141,3 +141,87 @@ document.addEventListener('DOMContentLoaded', function() {
     // Make clearChallenge2 globally accessible
     window.clearChallenge2 = clearChallenge2;
 });
+
+// Make checkAnswer globally accessible
+window.checkAnswerChallenge2 = async function checkAnswerChallenge2() {
+    const checkBtn = document.getElementById('check-answer-btn');
+    if (!checkBtn) {
+        console.error('Check button not found in checkAnswerChallenge2');
+        return;
+    }
+    
+    checkBtn.disabled = true;
+    checkBtn.textContent = 'Checking...';
+    
+    try {
+        if (!window.apiClient || !window.apiClient.validateChallenge2) {
+            showError('API client not loaded. Please refresh the page.');
+            checkBtn.disabled = false;
+            checkBtn.textContent = 'Check Answer';
+            return;
+        }
+        
+        const response = await window.apiClient.validateChallenge2(all_matches);
+        
+        if (response.success) {
+            showSuccess(response);
+            
+            // Update game state - merge with existing to preserve all collected letters
+            if (response.gameState && window.gameState) {
+                // Only set letters to true if they're true in response (don't overwrite with false)
+                if (response.gameState.collectedLetters) {
+                    Object.keys(response.gameState.collectedLetters).forEach(letter => {
+                        if (response.gameState.collectedLetters[letter] === true) {
+                            window.gameState.collectedLetters[letter] = true;
+                        }
+                        // Don't set to false - preserve existing true values
+                    });
+                }
+                if (response.gameState.challengesCompleted) {
+                    Object.keys(response.gameState.challengesCompleted).forEach(challenge => {
+                        if (response.gameState.challengesCompleted[challenge] === true) {
+                            window.gameState.challengesCompleted[challenge] = true;
+                        }
+                    });
+                }
+            }
+            
+            // Always call collectLetter and completeChallenge to ensure UI updates
+            if (typeof collectLetter === 'function') {
+                collectLetter('T');
+            }
+            
+            if (typeof completeChallenge === 'function') {
+                completeChallenge(2);
+            }
+            
+            // Force UI update after all state changes
+            if (typeof updateUI === 'function') {
+                updateUI();
+            }
+        } else {
+            showError(response.message || 'That\'s not quite right. Try again!');
+        }
+    } catch (error) {
+        console.error('Error details:', error);
+        const errorMessage = error.message || 'Unknown error';
+        if (errorMessage.includes('Failed to fetch') || errorMessage.includes('NetworkError') || errorMessage.includes('CORS')) {
+            showError('Error connecting to server. Make sure: 1) Backend is running on http://localhost:8080, 2) Frontend is served on http://localhost:8000 (not file://). Run: cd frontend && python3 -m http.server 8000');
+        } else {
+            showError(`Error: ${errorMessage}`);
+        }
+    } finally {
+        checkBtn.disabled = false;
+        checkBtn.textContent = 'Check Answer';
+    }
+}
+
+function showSuccess(response) {
+    const message = response.message || 'Congratulations! You correctly matched the majors to the careers!';
+    const codeComponent = response.codeComponent || 'T';
+    alert(`🎉 ${message}\n\nCode Component: ${codeComponent}`);
+}
+
+function showError(message) {
+    alert(`❌ ${message}`);
+}

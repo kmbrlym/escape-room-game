@@ -2,5 +2,7 @@
 /Users/kimberly/escape-room-game/backend/src/main/java/gamer/controllers/Challenge1Controller.java
 /Users/kimberly/escape-room-game/backend/src/main/java/gamer/services/ValidationService.java
 /Users/kimberly/escape-room-game/backend/src/main/java/gamer/models/GameState.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/controllers/Challenge2Controller.java
 /Users/kimberly/escape-room-game/backend/src/main/java/gamer/models/Challenge1Request.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/models/Challenge2Request.java
 /Users/kimberly/escape-room-game/backend/src/main/java/gamer/models/ChallengeResponse.java

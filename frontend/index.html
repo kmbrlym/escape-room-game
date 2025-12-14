@@ -7,9 +7,35 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <!-- Intro Splash Screen -->
+    <div id="intro-screen" class="intro-screen active">
+        <div class="intro-stick-man">
+            <svg width="200" height="300" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Head -->
+                <circle cx="40" cy="15" r="12" fill="none" stroke="#f5f5f5" stroke-width="3" stroke-linecap="round"/>
+                <!-- Body -->
+                <line x1="40" y1="27" x2="40" y2="65" stroke="#f5f5f5" stroke-width="3" stroke-linecap="round"/>
+                <!-- Arms -->
+                <line x1="40" y1="40" x2="20" y2="55" stroke="#f5f5f5" stroke-width="3" stroke-linecap="round"/>
+                <line x1="40" y1="40" x2="60" y2="55" stroke="#f5f5f5" stroke-width="3" stroke-linecap="round"/>
+                <!-- Legs -->
+                <line x1="40" y1="65" x2="25" y2="95" stroke="#f5f5f5" stroke-width="3" stroke-linecap="round"/>
+                <line x1="40" y1="65" x2="55" y2="95" stroke="#f5f5f5" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="intro-chatbox">
+            <div class="chatbox-content">
+                <h3>📋 How to Play</h3>
+                <div id="typewriter-text" class="typewriter-text"></div>
+            </div>
+            <div class="chatbox-tail"></div>
+        </div>
+        <button id="skip-intro-btn" class="skip-btn">Skip Intro</button>
+    </div>
+
     <div class="game-container">
         <header class="game-header">
-            <h1 class="game-title">🚀 The UTM Code Assembly</h1>
+            <h1 class="game-title">UTM Career Centre Escape Room</h1>
         </header>
 
 
@@ -37,18 +63,8 @@
             <!-- Home Page / Game Instructions -->
             <section id="home-page" class="page-section active">
                 <div class="instructions-container">
-                    <h2 class="section-title">Welcome to The UTM Code Assembly!</h2>
+                    <h2 class="section-title">Welcome to our first ever Escape Room Game!</h2>
                     
-                    <div class="game-rules">
-                        <h3>📋 How to Play</h3>
-                        <ol class="rules-list">
-                            <li>Complete challenges in order to collect code letters</li>
-                            <li>Each challenge unlocks the next one</li>
-                            <li>Collect all three letters: <strong>U</strong>, <strong>T</strong>, <strong>M</strong></li>
-                            <li>Use the complete code to unlock the Final Escape</li>
-                            <li>Good luck and have fun!</li>
-                        </ol>
-                    </div>
 
                     <div class="challenges-overview">
                         <h3>🔑 The Challenges</h3>
@@ -165,25 +181,6 @@
                         <button class="check-btn" id="check-answer-btn" onclick="if(typeof checkAnswer === 'function') { checkAnswer(); } else { console.error('checkAnswer function not found'); }">Check Answer</button>
                     </div>
 
-                    <!-- Clue Card (hidden initially) -->
-                    <div class="clue-card hidden" id="clue-card">
-                        <div class="clue-content">
-                            <h3>🎉 Congratulations!</h3>
-                            <p>You correctly assembled the location!</p>
-                            <p class="clue-instruction">
-                                <strong>Take the very first letter of the assembled word for the first code component.</strong>
-                            </p>
-                            <div class="code-component-reveal">
-                                <span class="code-letter-large">U</span>
-                                <p>Code Component: <strong>U</strong></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Error Message -->
-                    <div class="error-message hidden" id="error-message">
-                        <p>That's not quite right. Try rearranging the letters again!</p>
-                    </div>
 
                     <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
                 </div>
@@ -280,8 +277,10 @@
         <footer class="game-footer">
             <p>&copy; 2024 UTM Career Centre - Escape Room Game</p>
         </footer>
+        
     </div>
 
+    <script src="js/intro.js"></script>
     <script src="js/api-client.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/challenge1.js"></script>

@@ -728,6 +728,175 @@ body {
     font-size: 0.9rem;
 }
 
+/* Intro Splash Screen */
+.intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    visibility: visible;
+}
+
+.intro-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-stick-man {
+    margin-bottom: 40px;
+    animation: fadeInScale 1s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+.intro-stick-man svg {
+    display: block;
+    width: 200px;
+    height: 300px;
+}
+
+.intro-chatbox {
+    position: relative;
+    width: 500px;
+    max-width: 90%;
+    background: var(--card-bg);
+    border: 3px solid var(--highlight-color);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: var(--shadow-lg);
+    animation: fadeInUp 0.8s ease 0.5s both;
+}
+
+.intro-chatbox .chatbox-content h3 {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.typewriter-text {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.8;
+    min-height: 200px;
+}
+
+.typewriter-text ol {
+    margin-left: 20px;
+    padding: 0;
+}
+
+.typewriter-text li {
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.typewriter-text strong {
+    color: var(--highlight-color);
+}
+
+.intro-chatbox .chatbox-tail {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid var(--highlight-color);
+}
+
+.intro-chatbox .chatbox-tail::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: -12px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid var(--card-bg);
+}
+
+.skip-btn {
+    margin-top: 30px;
+    background: var(--accent-color);
+    color: var(--text-light);
+    border: 2px solid var(--border-color);
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.5s ease 1s forwards;
+}
+
+.skip-btn:hover {
+    background: var(--highlight-color);
+    border-color: var(--highlight-color);
+    transform: translateY(-2px);
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .intro-stick-man svg {
+        width: 150px;
+        height: 225px;
+    }
+    
+    .intro-chatbox {
+        width: 85%;
+        padding: 20px;
+    }
+    
+    .typewriter-text {
+        font-size: 0.9rem;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .game-title {

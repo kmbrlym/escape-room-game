@@ -34,7 +34,27 @@ async function validateChallenge1(word) {
     }
 }
 
+async function validateChallenge2(matches) {
+    try {
+        const requestBody = JSON.stringify({matches: matches});
+        const response = await fetch(`${API_BASE_URL}/challenge2/validate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: requestBody
+        });
+        const jsonResponse = await response.json();
+        return jsonResponse;
+    } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+    }   
+}
+
 window.apiClient = {
-    validateChallenge1
+    validateChallenge1,
+    validateChallenge2
 };
 

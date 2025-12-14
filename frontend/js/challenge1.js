@@ -12,8 +12,16 @@ function initChallenge1() {
     // Clear previous state
     const letterBin = document.getElementById('letter-bin');
     const assemblyArea = document.getElementById('assembly-area');
-    const clueCard = document.getElementById('clue-card');
-    const errorMessage = document.getElementById('error-message');
+    
+    if (!letterBin) {
+        console.error('letter-bin not found');
+        return;
+    }
+    
+    if (!assemblyArea) {
+        console.error('assembly-area not found');
+        return;
+    }
     
     letterBin.innerHTML = '';
     assemblyArea.querySelectorAll('.assembly-slot').forEach(slot => {
@@ -25,8 +33,6 @@ function initChallenge1() {
             slot.innerHTML = '<span class="space-indicator">_</span>';
         }
     });
-    clueCard.classList.add('hidden');
-    errorMessage.classList.add('hidden');
     
     shuffleArray(availableLetters);
     availableLetters.forEach((letter, index) => {
@@ -258,12 +264,38 @@ window.checkAnswer = async function checkAnswer() {
         if (response.success) {
             showSuccess(response);
             
+            // Update game state - merge with existing to preserve all collected letters
+            if (response.gameState && window.gameState) {
+                // Only set letters to true if they're true in response (don't overwrite with false)
+                if (response.gameState.collectedLetters) {
+                    Object.keys(response.gameState.collectedLetters).forEach(letter => {
+                        if (response.gameState.collectedLetters[letter] === true) {
+                            window.gameState.collectedLetters[letter] = true;
+                        }
+                        // Don't set to false - preserve existing true values
+                    });
+                }
+                if (response.gameState.challengesCompleted) {
+                    Object.keys(response.gameState.challengesCompleted).forEach(challenge => {
+                        if (response.gameState.challengesCompleted[challenge] === true) {
+                            window.gameState.challengesCompleted[challenge] = true;
+                        }
+                    });
+                }
+            }
+            
+            // Always call collectLetter and completeChallenge to ensure UI updates
             if (typeof collectLetter === 'function') {
                 collectLetter('U');
             }
             
             if (typeof completeChallenge === 'function') {
                 completeChallenge(1);
+            }
+            
+            // Force UI update after all state changes
+            if (typeof updateUI === 'function') {
+                updateUI();
             }
         } else {
             showError(response.message || 'That\'s not quite right. Try again!');
@@ -283,24 +315,13 @@ window.checkAnswer = async function checkAnswer() {
 }
 
 function showSuccess(response) {
-    const clueCard = document.getElementById('clue-card');
-    const errorMessage = document.getElementById('error-message');
-    
-    errorMessage.classList.add('hidden');
-    clueCard.classList.remove('hidden');
-    
-    // Scroll to clue card
-    clueCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const message = response.message || 'Congratulations! You correctly assembled the location!';
+    const codeComponent = response.codeComponent || 'U';
+    alert(`🎉 ${message}\n\nCode Component: ${codeComponent}`);
 }
 
 function showError(message) {
-    const errorMessage = document.getElementById('error-message');
-    errorMessage.querySelector('p').textContent = message;
-    errorMessage.classList.remove('hidden');
-    
-    setTimeout(() => {
-        errorMessage.classList.add('hidden');
-    }, 3000);
+    alert(`❌ ${message}`);
 }
 
 function shuffleArray(array) {
