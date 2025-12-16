@@ -8,31 +8,32 @@
 }
 
 :root {
-    --primary-color: #1a1a2e;
-    --secondary-color: #16213e;
-    --accent-color: #0f3460;
-    --highlight-color: #e94560;
+    /* UofT Official Colors */
+    --primary-color: #002A5C; /* UofT Navy Blue */
+    --secondary-color: #003D7A; /* Darker Navy */
+    --accent-color: #0055A4; /* Medium Blue */
+    --highlight-color: #0066CC; /* Bright Blue Accent */
     --success-color: #4caf50;
-    --text-light: #f5f5f5;
-    --text-muted: #b0b0b0;
-    --card-bg: #2a2a3e;
-    --border-color: #3a3a4e;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --text-light: #FFFFFF; /* White */
+    --text-muted: #E0E0E0; /* Light Gray */
+    --card-bg: #FFFFFF; /* White */
+    --border-color: #002A5C; /* Navy Blue */
+    --shadow: 0 4px 6px rgba(0, 42, 92, 0.2);
+    --shadow-lg: 0 8px 16px rgba(0, 42, 92, 0.3);
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: var(--text-light);
+    background: var(--card-bg);
+    color: var(--primary-color);
     min-height: 100vh;
     line-height: 1.6;
 }
 
 .game-container {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 16px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -41,40 +42,42 @@ body {
 /* Header Styles */
 .game-header {
     background: var(--card-bg);
-    border-radius: 12px;
     padding: 20px 30px;
-    margin-bottom: 30px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border-color);
 }
 
 .game-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: center;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, var(--highlight-color), #ff6b9d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 2px 4px rgba(233, 69, 96, 0.3);
+    color: var(--secondary-color);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.utm-logo-fixed {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    z-index: 20000;
 }
 
 
 /* Progress Indicator */
 .progress-section {
     background: var(--card-bg);
-    border-radius: 12px;
     padding: 25px;
-    margin-bottom: 30px;
-    box-shadow: var(--shadow-lg);
+    margin-bottom: 50px;
     border: 1px solid var(--border-color);
     text-align: center;
 }
 
 .progress-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-bottom: 20px;
-    color: var(--text-light);
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 .progress-indicator {
@@ -86,15 +89,15 @@ body {
 }
 
 .code-letter {
-    width: 80px;
-    height: 80px;
+    width: 64px;
+    height: 64px;
     border: 3px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: var(--accent-color);
+    background: var(--card-bg);
     transition: all 0.3s ease;
     position: relative;
 }
@@ -106,20 +109,9 @@ body {
     transform: scale(1.1);
 }
 
-.code-letter .letter-placeholder {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--text-light);
-    opacity: 0.3;
-}
-
-.code-letter.collected .letter-placeholder {
-    opacity: 1;
-    color: white;
-}
 
 .code-letter .letter-status {
-    font-size: 0.9rem;
+    font-size: 2rem;
     margin-top: 5px;
     color: var(--text-muted);
 }
@@ -129,15 +121,16 @@ body {
 }
 
 .progress-hint {
-    color: var(--text-muted);
+    color: var(--primary-color);
     font-style: italic;
     margin-top: 10px;
+    opacity: 0.8;
 }
 
 /* Main Content */
 .main-content {
     flex: 1;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .page-section {
@@ -163,48 +156,41 @@ body {
 /* Instructions Container */
 .instructions-container {
     background: var(--card-bg);
-    border-radius: 12px;
-    padding: 40px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border-color);
-}
-
-.section-title {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    text-align: center;
-    color: var(--text-light);
+    padding: 50px;
 }
 
 
 .challenges-overview {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
 }
 
 .challenges-overview h3 {
-    font-size: 1.5rem;
-    margin-bottom: 25px;
+    font-size: 1.3rem;
+    margin-bottom: 18px;
     text-align: center;
 }
 
 .challenge-card {
-    background: var(--accent-color);
+    background: var(--card-bg);
     border-radius: 10px;
-    padding: 25px;
-    margin-bottom: 20px;
-    border: 2px solid var(--border-color);
+    padding: 20px;
+    margin-bottom: 40px;
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
+    box-shadow: var(--shadow);
 }
 
 .challenge-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
     border-color: var(--highlight-color);
+    border-width: 3px;
 }
 
 .challenge-card.final-card {
-    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    background: linear-gradient(135deg, var(--card-bg), #F0F4F8);
     border-color: var(--highlight-color);
+    border-width: 3px;
 }
 
 .challenge-header {
@@ -217,7 +203,8 @@ body {
 .challenge-number {
     width: 40px;
     height: 40px;
-    background: var(--highlight-color);
+    background: var(--primary-color);
+    color: var(--text-light);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -228,28 +215,29 @@ body {
 }
 
 .challenge-card h4 {
-    font-size: 1.3rem;
-    color: var(--text-light);
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 .challenge-description {
     margin-bottom: 10px;
-    color: var(--text-light);
-    line-height: 1.8;
+    color: var(--primary-color);
+    line-height: 1.6;
 }
 
 .challenge-mechanic {
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--accent-color);
     font-style: italic;
     margin-bottom: 15px;
 }
 
 .challenge-btn {
-    background: var(--highlight-color);
-    color: white;
+    background: var(--primary-color);
+    color: var(--text-light);
     border: none;
-    padding: 12px 30px;
+    padding: 10px 24px;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: bold;
@@ -260,32 +248,23 @@ body {
 }
 
 .challenge-btn:hover:not(:disabled) {
-    background: #d63447;
+    background: var(--accent-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
 }
 
 .challenge-btn:disabled {
-    background: var(--border-color);
-    color: var(--text-muted);
+    background: #E0E0E0;
+    color: #9E9E9E;
     cursor: not-allowed;
     opacity: 0.6;
 }
 
-.challenge-btn.final-btn {
-    background: linear-gradient(135deg, var(--success-color), #66bb6a);
-}
-
-.challenge-btn.final-btn:hover:not(:disabled) {
-    background: linear-gradient(135deg, #66bb6a, var(--success-color));
-}
-
 .game-rules {
-    margin-top: 40px;
-    padding: 25px;
-    background: var(--accent-color);
+    margin-top: 28px;
+    padding: 20px;
+    background: var(--card-bg);
     border-radius: 8px;
-    border-left: 4px solid var(--highlight-color);
+    border-left: 4px solid var(--primary-color);
 }
 
 .game-rules h3 {
@@ -305,15 +284,22 @@ body {
 /* Challenge Container */
 .challenge-container {
     background: var(--card-bg);
-    border-radius: 12px;
-    padding: 40px;
+    border-radius: 5px;
+    padding: 28px;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--border-color);
 }
 
+.challenge-container h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 16px;
+    font-size: 1.6rem;
+}
+
 .back-btn {
-    background: var(--accent-color);
-    color: var(--text-light);
+    background: var(--card-bg);
+    color: var(--primary-color);
     border: 2px solid var(--border-color);
     padding: 10px 20px;
     border-radius: 8px;
@@ -321,55 +307,58 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 20px;
+    font-weight: 600;
 }
 
 .back-btn:hover {
-    background: var(--highlight-color);
-    border-color: var(--highlight-color);
+    background: var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
 }
 
 /* Challenge 1 Styles */
 .challenge-instruction {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
+    font-size: 1rem;
+    margin-bottom: 22px;
     text-align: center;
-    color: var(--text-light);
+    color: var(--primary-color);
     line-height: 1.6;
 }
 
 .letter-bin-section,
 .assembly-section {
-    margin-bottom: 30px;
+    margin-bottom: 22px;
 }
 
 .letter-bin-section h3,
 .assembly-section h3 {
     font-size: 1.2rem;
     margin-bottom: 15px;
-    color: var(--text-light);
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 .letter-bin {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    padding: 20px;
-    background: var(--accent-color);
+    padding: 16px;
+    background: var(--card-bg);
     border-radius: 8px;
     border: 2px solid var(--border-color);
     min-height: 100px;
 }
 
 .letter-tile {
-    width: 50px;
-    height: 50px;
-    background: var(--card-bg);
+    width: 44px;
+    height: 44px;
+    background: var(--primary-color);
     border: 2px solid var(--border-color);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: var(--text-light);
     cursor: grab;
@@ -378,8 +367,8 @@ body {
 }
 
 .letter-tile:hover {
-    background: var(--highlight-color);
-    border-color: var(--highlight-color);
+    background: var(--accent-color);
+    border-color: var(--accent-color);
     transform: scale(1.1);
     cursor: grab;
 }
@@ -396,8 +385,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    padding: 20px;
-    background: var(--accent-color);
+    padding: 16px;
+    background: var(--card-bg);
     border-radius: 8px;
     border: 2px solid var(--border-color);
     min-height: 150px;
@@ -405,8 +394,8 @@ body {
 }
 
 .assembly-slot {
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border: 2px dashed var(--border-color);
     border-radius: 8px;
     display: flex;
@@ -418,7 +407,7 @@ body {
 
 .assembly-slot.drag-over {
     border-color: var(--highlight-color);
-    background: rgba(233, 69, 96, 0.2);
+    background: rgba(0, 85, 164, 0.2);
     transform: scale(1.1);
 }
 
@@ -442,19 +431,21 @@ body {
 }
 
 .clear-btn {
-    background: var(--accent-color);
-    color: var(--text-light);
+    background: var(--card-bg);
+    color: var(--primary-color);
     border: 2px solid var(--border-color);
     padding: 8px 20px;
     border-radius: 8px;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .clear-btn:hover {
-    background: var(--highlight-color);
-    border-color: var(--highlight-color);
+    background: var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
 }
 
 .check-section {
@@ -494,7 +485,7 @@ body {
     margin: 30px 0;
     padding: 30px;
     background: linear-gradient(135deg, var(--success-color), #66bb6a);
-    border-radius: 12px;
+    border-radius: 5px;
     border: 3px solid var(--success-color);
     box-shadow: 0 8px 16px rgba(76, 175, 80, 0.4);
     animation: slideIn 0.5s ease;
@@ -560,10 +551,10 @@ body {
 .error-message {
     margin: 20px 0;
     padding: 15px 20px;
-    background: rgba(233, 69, 96, 0.2);
-    border: 2px solid var(--highlight-color);
+    background: #FFEBEE;
+    border: 2px solid #D32F2F;
     border-radius: 8px;
-    color: var(--text-light);
+    color: #C62828;
     text-align: center;
     animation: shake 0.5s ease;
 }
@@ -588,7 +579,7 @@ body {
 
 /* Example Card Styles - Responsive Card Component */
 .cards-container .example-card {
-    border-radius: 12px;
+    border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
     transition: all 0.3s ease;
@@ -597,32 +588,32 @@ body {
     position: relative;
 }
 
-/* Major Card Styling - Red accent */
+/* Major Card Styling - Navy Blue accent */
 .cards-container .example-card.major-card {
-    background: linear-gradient(135deg, #2a2a3e 0%, #3a1a2e 100%);
-    border: 2px solid #e94560;
-    border-left: 5px solid #e94560;
+    background: var(--card-bg);
+    border: 2px solid var(--primary-color);
+    border-left: 5px solid var(--primary-color);
 }
 
 .cards-container .example-card.major-card:hover {
     transform: translateY(-5px);
-    border-color: #e94560;
-    box-shadow: 0 12px 24px rgba(233, 69, 96, 0.4);
-    background: linear-gradient(135deg, #3a2a4e 0%, #4a1a3e 100%);
+    border-color: var(--accent-color);
+    box-shadow: 0 12px 24px rgba(0, 42, 92, 0.3);
+    background: #F5F7FA;
 }
 
-/* Career Card Styling - Orange accent */
+/* Career Card Styling - Medium Blue accent */
 .cards-container .example-card.career-card {
-    background: linear-gradient(135deg, #2a2a3e 0%, #3a2a1e 100%);
-    border: 2px solid #ff9800;
-    border-left: 5px solid #ff9800;
+    background: var(--card-bg);
+    border: 2px solid var(--accent-color);
+    border-left: 5px solid var(--accent-color);
 }
 
 .cards-container .example-card.career-card:hover {
     transform: translateY(-5px);
-    border-color: #ff9800;
-    box-shadow: 0 12px 24px rgba(255, 152, 0, 0.4);
-    background: linear-gradient(135deg, #3a3a4e 0%, #4a3a2e 100%);
+    border-color: var(--highlight-color);
+    box-shadow: 0 12px 24px rgba(0, 85, 164, 0.3);
+    background: #F5F7FA;
 }
 
 /* Disabled card styles - no movement or hover effects */
@@ -644,10 +635,10 @@ body {
     padding: 25px;
 }
 
-/* Major card badge - Red */
+/* Major card badge - Navy Blue */
 .cards-container .example-card.major-card .card-badge {
     display: inline-block;
-    background: #e94560;
+    background: var(--primary-color);
     color: white;
     padding: 6px 12px;
     border-radius: 20px;
@@ -658,10 +649,10 @@ body {
     margin-bottom: 15px;
 }
 
-/* Career card badge - Orange */
+/* Career card badge - Medium Blue */
 .cards-container .example-card.career-card .card-badge {
     display: inline-block;
-    background: #ff9800;
+    background: var(--accent-color);
     color: white;
     padding: 6px 12px;
     border-radius: 20px;
@@ -674,13 +665,13 @@ body {
 
 .cards-container .example-card .card-title {
     font-size: 1.5rem;
-    color: #f5f5f5;
+    color: var(--primary-color);
     margin-bottom: 12px;
     font-weight: 600;
 }
 
 .cards-container .example-card .card-description {
-    color: #b0b0b0;
+    color: var(--secondary-color);
     line-height: 1.6;
     margin-bottom: 20px;
     font-size: 0.95rem;
@@ -691,17 +682,17 @@ body {
     gap: 10px;
     flex-wrap: wrap;
     padding-top: 15px;
-    border-top: 1px solid #3a3a4e;
+    border-top: 1px solid #E0E0E0;
 }
 
 .cards-container .example-card .card-tag {
     display: inline-block;
-    background: #0f3460;
-    color: #f5f5f5;
+    background: var(--accent-color);
+    color: var(--text-light);
     padding: 5px 12px;
     border-radius: 15px;
     font-size: 0.85rem;
-    border: 1px solid #3a3a4e;
+    border: 1px solid var(--accent-color);
 }
 
 /* Responsive Card Styles */
@@ -724,7 +715,7 @@ body {
 .game-footer {
     text-align: center;
     padding: 20px;
-    color: var(--text-muted);
+    color: var(--text-light);
     font-size: 0.9rem;
 }
 
@@ -758,10 +749,11 @@ body {
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
 }
 
-.intro-stick-man svg {
+.intro-stick-man .intro-logo {
     display: block;
     width: 200px;
-    height: 300px;
+    height: 200px;
+    object-fit: contain;
 }
 
 .intro-chatbox {
@@ -769,7 +761,7 @@ body {
     width: 500px;
     max-width: 90%;
     background: var(--card-bg);
-    border: 3px solid var(--highlight-color);
+    border: 3px solid var(--primary-color);
     border-radius: 16px;
     padding: 30px;
     box-shadow: var(--shadow-lg);
@@ -777,14 +769,15 @@ body {
 }
 
 .intro-chatbox .chatbox-content h3 {
-    color: var(--text-light);
+    color: var(--primary-color);
     font-size: 1.5rem;
     margin-bottom: 20px;
     text-align: center;
+    font-weight: 700;
 }
 
 .typewriter-text {
-    color: var(--text-light);
+    color: var(--primary-color);
     font-size: 1rem;
     line-height: 1.8;
     min-height: 200px;
@@ -802,7 +795,7 @@ body {
 }
 
 .typewriter-text strong {
-    color: var(--highlight-color);
+    color: var(--accent-color);
 }
 
 .intro-chatbox .chatbox-tail {
@@ -814,7 +807,7 @@ body {
     height: 0;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-top: 15px solid var(--highlight-color);
+    border-top: 15px solid var(--primary-color);
 }
 
 .intro-chatbox .chatbox-tail::after {
@@ -831,8 +824,8 @@ body {
 
 .skip-btn {
     margin-top: 30px;
-    background: var(--accent-color);
-    color: var(--text-light);
+    background: var(--card-bg);
+    color: var(--primary-color);
     border: 2px solid var(--border-color);
     padding: 10px 25px;
     border-radius: 8px;
@@ -841,11 +834,13 @@ body {
     transition: all 0.3s ease;
     opacity: 0;
     animation: fadeIn 0.5s ease 1s forwards;
+    font-weight: 600;
 }
 
 .skip-btn:hover {
-    background: var(--highlight-color);
-    border-color: var(--highlight-color);
+    background: var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
     transform: translateY(-2px);
 }
 
@@ -914,10 +909,6 @@ body {
 
     .instructions-container {
         padding: 20px;
-    }
-
-    .section-title {
-        font-size: 1.5rem;
     }
 }
 
