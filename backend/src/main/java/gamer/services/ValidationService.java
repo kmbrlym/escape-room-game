@@ -12,8 +12,10 @@ public class ValidationService {
         // how can you check equality in java?
         // from the java documentation: https://docs.oracle.com/javase/8/docs/api/java/lang/String.html
         // hint: it is the equals(Object anObject) method
-        // TODO HERE
-
+        result = false;
+        if (word=="DAVIS MAIN FLOOR"){result=true}
+        return result;
+    
     }
     
     public boolean validateChallenge2(List<List<String>> matches) {
