@@ -1,8 +1,8 @@
-/Users/notjackl3/Desktop/CODING/escape-room-game/backend/src/main/java/gamer/services/ValidationService.java
-/Users/notjackl3/Desktop/CODING/escape-room-game/backend/src/main/java/gamer/models/Challenge1Request.java
-/Users/notjackl3/Desktop/CODING/escape-room-game/backend/src/main/java/gamer/models/ChallengeResponse.java
-/Users/notjackl3/Desktop/CODING/escape-room-game/backend/src/main/java/gamer/models/Challenge2Request.java
-/Users/notjackl3/Desktop/CODING/escape-room-game/backend/src/main/java/gamer/GameServer.java
-/Users/notjackl3/Desktop/CODING/escape-room-game/backend/src/main/java/gamer/models/GameState.java
-/Users/notjackl3/Desktop/CODING/escape-room-game/backend/src/main/java/gamer/controllers/Challenge2Controller.java
-/Users/notjackl3/Desktop/CODING/escape-room-game/backend/src/main/java/gamer/controllers/Challenge1Controller.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/GameServer.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/controllers/Challenge1Controller.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/services/ValidationService.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/models/GameState.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/controllers/Challenge2Controller.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/models/Challenge1Request.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/models/Challenge2Request.java
+/Users/kimberly/escape-room-game/backend/src/main/java/gamer/models/ChallengeResponse.java

@@ -12,8 +12,8 @@ public class ValidationService {
         // how can you check equality in java?
         // from the java documentation: https://docs.oracle.com/javase/8/docs/api/java/lang/String.html
         // hint: it is the equals(Object anObject) method
-        result = false;
-        if (word=="DAVIS MAIN FLOOR"){result=true}
+        boolean result = false;
+        if (word.equals("DAVIS MAIN FLOOR")){result=true;}
         return result;
     
     }
@@ -50,6 +50,7 @@ public class ValidationService {
         // After checking all matches:
         // If ALL three correct pairs were found, return true
         // Otherwise, return false
+        
     }
     
     public boolean validateChallenge3(String programI, String programII, String programIII) {
