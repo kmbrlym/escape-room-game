@@ -50,7 +50,7 @@ public class ValidationService {
         // After checking all matches:
         // If ALL three correct pairs were found, return true
         // Otherwise, return false
-        
+        return false;
     }
     
     public boolean validateChallenge3(String programI, String programII, String programIII) {
