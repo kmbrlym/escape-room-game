@@ -9,6 +9,19 @@
 <body>
     <img src="assets/utm-cc.png" alt="UTM Career Centre logo" class="utm-logo-fixed">
 
+    <div id="video-overlay" class="video-overlay">
+        <button id="close-video-btn" class="close-video-btn" aria-label="Close video">×</button>
+        <div class="video-overlay-content">
+            <div class="video-wrapper">
+                <video id="intro-video" class="intro-video" autoplay muted playsinline controls>
+                    <!-- .MOV files use video/quicktime MIME type -->
+                    <source src="assets/[name here]" type="video/quicktime">
+                    <source src="assets/[name here]" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
     <!-- Intro Splash Screen -->
     <div id="intro-screen" class="intro-screen active">
         <div class="intro-stick-man">
