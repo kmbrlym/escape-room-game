@@ -252,8 +252,15 @@ window.checkAnswer = async function checkAnswer() {
                 collectLetter('U');
             }
             
-            if (typeof completeChallenge === 'function') {
+            if (window.completeChallenge && typeof window.completeChallenge === 'function') {
+                window.completeChallenge(1);
+            } else if (typeof completeChallenge === 'function') {
                 completeChallenge(1);
+            } else if (window.gameState) {
+                // Fallback: manually update state
+                window.gameState.challengesCompleted = window.gameState.challengesCompleted || {};
+                window.gameState.challengesCompleted.challenge1 = true;
+                localStorage.setItem('gameState', JSON.stringify(window.gameState));
             }
             
             if (window.saveGameState && typeof window.saveGameState === 'function') {

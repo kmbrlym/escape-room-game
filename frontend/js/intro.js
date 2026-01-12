@@ -22,7 +22,38 @@ function initVideoOverlay() {
         return;
     }
     
-    // Always show video overlay on page load (removed localStorage check)
+    // Check if video has been shown before
+    const videoShown = localStorage.getItem('videoShown');
+    const introShown = localStorage.getItem('introShown');
+    
+    if (videoShown === 'true') {
+        // Video already shown, skip directly to game
+        videoOverlay.classList.add('hidden');
+        const introScreen = document.getElementById('intro-screen');
+        const gameContainer = document.querySelector('.game-container');
+        
+        if (introShown === 'true') {
+            // Intro also shown before, go straight to game
+            if (introScreen) {
+                introScreen.classList.add('hidden');
+            }
+            if (gameContainer) {
+                gameContainer.style.display = 'flex';
+            }
+        } else {
+            // Show intro screen but not video
+            if (introScreen) {
+                introScreen.style.display = 'flex';
+            }
+            if (gameContainer) {
+                gameContainer.style.display = 'none';
+            }
+            startTypewriter();
+        }
+        return;
+    }
+    
+    // First time - show video overlay on page load
     // Ensure overlay is visible (remove hidden class if present)
     videoOverlay.classList.remove('hidden');
     
@@ -117,7 +148,8 @@ function closeVideoOverlay() {
     
     // Hide video overlay
     videoOverlay.classList.add('hidden');
-    // Note: Not storing in localStorage so video always shows on page load
+    // Store flag in localStorage so video doesn't show again
+    localStorage.setItem('videoShown', 'true');
     
     // Show intro screen or game container
     const introShown = localStorage.getItem('introShown');

@@ -74,60 +74,61 @@
         <main class="main-content">
             <!-- Home Page / Game Instructions -->
             <div class="instructions-container">                
-                <div class="challenges-overview">                    
-                    <div class="challenge-card">
-                        <div class="challenge-header">
-                            <span class="challenge-number">1</span>
-                            <h4>Challenge 1: The Centre Location</h4>
-                        </div>
-                        <p class="challenge-description">
-                            Do you know where the Career Centre is located? Rearrange the letters to spell the location.<strong>U</strong>.
-                        </p>
-                        <p class="challenge-mechanic">Puzzle Type: Word Assembly</p>
-                        <button class="challenge-btn" data-challenge="1" aria-label="Start Challenge 1">
-                            Start Challenge 1
-                        </button>
-                    </div>
+                <div class="challenges-overview">
+                    <!-- Desk/Table for Challenge Cards -->
+                    <div class="desk-container">
+                        <div class="desk-label">Challenge Desk</div>
+                        <div class="desk-surface">
+                            <div class="challenge-cards-on-desk">
+                                <div class="challenge-card-wrapper desk-card" data-challenge="1">
+                                    <div class="challenge-card" data-challenge-number="1">
+                                        <div class="challenge-header">
+                                            <span class="challenge-number">1</span>
+                                            <h4>Challenge 1: The Centre Location</h4>
+                                        </div>
+                                        <p class="challenge-description">
+                                            Do you know where the Career Centre is located? Rearrange the letters to spell the location and earn the letter <strong>U</strong>.
+                                        </p>
+                                        <p class="challenge-mechanic">Puzzle Type: Word Assembly</p>
+                                        <button class="challenge-btn" data-challenge="1" aria-label="Start Challenge 1">
+                                            Start Challenge 1
+                                        </button>
+                                    </div>
+                                </div>
 
-                    <div class="challenge-card">
-                        <div class="challenge-header">
-                            <span class="challenge-number">2</span>
-                            <h4>Challenge 2: Careers by Major Match</h4>
-                        </div>
-                        <p class="challenge-description">
-                            Correctly match UTM Major Groups to related Career Fields to earn the letter <strong>T</strong>.
-                        </p>
-                        <p class="challenge-mechanic">Puzzle Type: Card Matching</p>
-                        <button class="challenge-btn" data-challenge="2" aria-label="Start Challenge 2" disabled>
-                            Start Challenge 2
-                        </button>
-                    </div>
+                                <div class="challenge-card-wrapper desk-card" data-challenge="2">
+                                    <div class="challenge-card" data-challenge-number="2">
+                                        <div class="challenge-header">
+                                            <span class="challenge-number">2</span>
+                                            <h4>Challenge 2: Careers by Major Match</h4>
+                                        </div>
+                                        <p class="challenge-description">
+                                            Correctly match UTM Major Groups to related Career Fields to earn the letter <strong>T</strong>.
+                                        </p>
+                                        <p class="challenge-mechanic">Puzzle Type: Card Matching</p>
+                                        <button class="challenge-btn" data-challenge="2" aria-label="Start Challenge 2" disabled>
+                                            Start Challenge 2
+                                        </button>
+                                    </div>
+                                </div>
 
-                    <div class="challenge-card">
-                        <div class="challenge-header">
-                            <span class="challenge-number">3</span>
-                            <h4>Challenge 3: Program Function Match</h4>
+                                <div class="challenge-card-wrapper desk-card" data-challenge="3">
+                                    <div class="challenge-card" data-challenge-number="3">
+                                        <div class="challenge-header">
+                                            <span class="challenge-number">3</span>
+                                            <h4>Challenge 3: Program Function Match</h4>
+                                        </div>
+                                        <p class="challenge-description">
+                                            Match the program name to its core function to find the final letter <strong>M</strong>.
+                                        </p>
+                                        <p class="challenge-mechanic">Puzzle Type: Three-Way Matching</p>
+                                        <button class="challenge-btn" data-challenge="3" aria-label="Start Challenge 3" disabled>
+                                            Start Challenge 3
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="challenge-description">
-                            Match the program name to its core function to find the final letter <strong>M</strong>.
-                        </p>
-                        <p class="challenge-mechanic">Puzzle Type: Three-Way Matching</p>
-                        <button class="challenge-btn" data-challenge="3" aria-label="Start Challenge 3" disabled>
-                            Start Challenge 3
-                        </button>
-                    </div>
-
-                    <div class="challenge-card final-card">
-                        <div class="challenge-header">
-                            <span class="challenge-number">🔓</span>
-                            <h4>Final Escape: Unlock the Career Centre</h4>
-                        </div>
-                        <p class="challenge-description">
-                            Enter the complete code to unlock the Career Centre and claim your reward!
-                        </p>
-                        <button class="challenge-btn final-btn" data-challenge="final" aria-label="Final Escape" disabled>
-                            Unlock Career Centre
-                        </button>
                     </div>
                 </div>
             </div>

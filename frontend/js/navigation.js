@@ -32,7 +32,8 @@ function saveGameState() {
 let gameState = loadGameState();
 window.gameState = gameState;
 
-document.addEventListener('DOMContentLoaded', function() {
+function initializeGame() {
+    // Always reload game state from localStorage to get latest state
     gameState = loadGameState();
     window.gameState = gameState;
     
@@ -42,6 +43,15 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         updateUI();
     }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeGame();
+});
+
+// Also call on page show (when user navigates back)
+window.addEventListener('pageshow', function(event) {
+    initializeGame();
 });
 
 function initializeChallengeButtons() {
@@ -62,19 +72,6 @@ function initializeChallengeButtons() {
     });
 }
 
-function showPage(pageName) {
-    if (pageName === 'challenge1') {
-        window.location.href = 'challenge1.html';
-    } else if (pageName === 'challenge2') {
-        window.location.href = 'challenge2.html';
-    } else if (pageName === 'challenge3') {
-        window.location.href = 'challenge3.html';
-    } else if (pageName === 'final-escape') {
-        window.location.href = 'final-escape.html';
-    } else if (pageName === 'home') {
-        window.location.href = 'index.html';
-    }
-}
 
 function updateUI() {
     updateProgressIndicator();
@@ -96,21 +93,32 @@ function updateProgressIndicator() {
 }
 
 function updateChallengeButtons() {
-    const challenge1Btn = document.querySelector('[data-challenge="1"]');
-    const challenge2Btn = document.querySelector('[data-challenge="2"]');
-    const challenge3Btn = document.querySelector('[data-challenge="3"]');
-    const finalBtn = document.querySelector('[data-challenge="final"]');
+    const challenge1Btn = document.querySelector('button[data-challenge="1"]');
+    const challenge2Btn = document.querySelector('button[data-challenge="2"]');
+    const challenge3Btn = document.querySelector('button[data-challenge="3"]');
+    const finalBtn = document.querySelector('button[data-challenge="final"]');
 
     if (challenge1Btn) {
         challenge1Btn.disabled = false;
     }
 
     if (challenge2Btn) {
-        challenge2Btn.disabled = !gameState.challengesCompleted.challenge1;
+        const shouldEnable = gameState.challengesCompleted.challenge1;
+        challenge2Btn.disabled = !shouldEnable;
+        if (shouldEnable) {
+            challenge2Btn.classList.remove('disabled');
+        } else {
+            challenge2Btn.classList.add('disabled');
+        }
     }
 
     if (challenge3Btn) {
         challenge3Btn.disabled = !gameState.challengesCompleted.challenge2;
+        if (gameState.challengesCompleted.challenge2) {
+            challenge3Btn.classList.remove('disabled');
+        } else {
+            challenge3Btn.classList.add('disabled');
+        }
     }
 
     if (finalBtn) {
@@ -138,15 +146,12 @@ function completeChallenge(challengeNumber) {
         window.gameState.challengesCompleted[`challenge${challengeNumber}`] = true;
     }
     saveGameState();
+    // Reload game state to ensure consistency
+    gameState = loadGameState();
+    window.gameState = gameState;
     updateUI();
 }
 
+window.completeChallenge = completeChallenge;
 window.updateUI = updateUI;
 window.saveGameState = saveGameState;
-
-window.addEventListener('hashchange', function() {
-    if (document.getElementById('home-page')) {
-        const hash = window.location.hash.substring(1) || 'home';
-        showPage(hash);
-    }
-});

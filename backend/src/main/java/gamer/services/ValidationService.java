@@ -50,7 +50,37 @@ public class ValidationService {
         // After checking all matches:
         // If ALL three correct pairs were found, return true
         // Otherwise, return false
-        return false;
+        boolean hasCorrectCS = false;
+        boolean hasCorrectFS = false;
+        boolean hasCorrectBio = false;
+        
+        for (List<String> match : matches) {
+            if (match.size() >= 2) {
+                String first = match.get(0);
+                String second = match.get(1);
+                
+                // Check for correct CS match
+                if ((first.equals("CSmajor") && second.equals("CScareer")) ||
+                    (first.equals("CScareer") && second.equals("CSmajor"))) {
+                    hasCorrectCS = true;
+                }
+                
+                // Check for correct FS match
+                if ((first.equals("FSmajor") && second.equals("FScareer")) ||
+                    (first.equals("FScareer") && second.equals("FSmajor"))) {
+                    hasCorrectFS = true;
+                }
+                
+                // Check for correct Bio match
+                if ((first.equals("BioMajor") && second.equals("Biocareer")) ||
+                    (first.equals("Biocareer") && second.equals("BioMajor"))) {
+                    hasCorrectBio = true;
+                }
+            }
+        }
+        
+        return hasCorrectCS && hasCorrectFS && hasCorrectBio;
+
     }
     
     public boolean validateChallenge3(String programI, String programII, String programIII) {
