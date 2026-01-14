@@ -42,7 +42,26 @@ async function validateChallenge2(matches) {
     }   
 }
 
+async function validateChallenge3(answers) {
+    try {
+        const requestBody = JSON.stringify({ answers: answers });
+        const response = await fetch(`${API_BASE_URL}/challenge3/validate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: requestBody
+        });
+        return await response.json();
+    } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+    }
+}
+
 window.apiClient = {
     validateChallenge1,
-    validateChallenge2
+    validateChallenge2,
+    validateChallenge3
 };

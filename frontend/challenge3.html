@@ -32,8 +32,27 @@
 
         <main class="main-content">
             <div class="challenge-container">
-                <h2>Challenge 3: Program Function Match</h2>
-                <p>Challenge 3 content will be implemented here.</p>
+                <h2>Challenge 3: Interview Response Challenge</h2>
+                <p class="challenge-instruction">
+                    You’re in a mock interview. For each question, choose the <strong>most professional</strong> response.
+                    Answer all 5 correctly to earn the final letter <strong>M</strong>.
+                </p>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="quiz-header">
+                        <div class="quiz-progress" id="quiz-progress">Question 1 of 5</div>
+                        <h3 class="quiz-question" id="quiz-question"></h3>
+                    </div>
+
+                    <div class="quiz-choices" id="quiz-choices" role="radiogroup" aria-label="Answer choices">
+                        <!-- choices rendered by JS -->
+                    </div>
+
+                    <div class="quiz-actions">
+                        <button class="clear-btn" id="quiz-prev-btn" disabled>Back</button>
+                        <button class="check-btn" id="quiz-next-btn" disabled>Next</button>
+                    </div>
+                </div>
                 <button class="back-btn" onclick="window.location.href='index.html'">← Back to Home</button>
             </div>
         </main>
@@ -46,6 +65,6 @@
 
     <script src="js/api-client.js"></script>
     <script src="js/navigation.js"></script>
-    <!-- <script src="js/challenge3.js"></script> -->
+    <script src="js/challenge3.js"></script>
 </body>
 </html>

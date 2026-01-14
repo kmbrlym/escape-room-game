@@ -1,6 +1,7 @@
 package gamer.services;
 
 import org.springframework.stereotype.Service;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -83,8 +84,26 @@ public class ValidationService {
 
     }
     
-    public boolean validateChallenge3(String programI, String programII, String programIII) {
-        return false;
+    public boolean validateChallenge3(List<String> answers) {
+        if (answers == null || answers.size() != 5) {
+            return false;
+        }
+
+        // Correct choices for the 5 interview questions (A/B/C), in order.
+        // Note: keep this in sync with the frontend quiz question order.
+        List<String> correct = Arrays.asList("B", "A", "C", "B", "A");
+
+        for (int i = 0; i < correct.size(); i++) {
+            String provided = answers.get(i);
+            if (provided == null) {
+                return false;
+            }
+            if (!correct.get(i).equalsIgnoreCase(provided.trim())) {
+                return false;
+            }
+        }
+
+        return true;
     }
     
     public boolean validateFinalEscape(String code) {
